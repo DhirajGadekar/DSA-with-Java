@@ -28,4 +28,40 @@
 		0 <= C <= N-1
  */
 
-
+class Solution {
+    
+    static int countNodesinLoop(Node head) {
+        
+        int count = 0;
+        if(head.next == null) {
+            
+            return 0;
+        }
+        Node slow = head;
+        Node fast = head;
+        int flag = 0;
+        while(slow != null && fast != null && fast.next != null) {
+            
+            slow = slow.next;
+            fast = fast.next.next;
+            if(slow == fast) {
+                
+                flag = 1;
+                break;
+            }
+        }
+        if(flag == 1) {
+            
+            count = 1;
+            slow = slow.next;
+            while(slow != fast) {
+                
+                count++;
+                slow = slow.next;
+            
+            }
+            return count;
+        }
+        return 0;
+    }
+}
